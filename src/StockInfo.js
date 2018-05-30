@@ -7,7 +7,8 @@ class StockInfo extends Component {
         super(props);
 
         this.state = {
-            information: []
+            information: [],
+            name: ''
         };
 
         this.fetchStockInfo();
@@ -26,10 +27,20 @@ class StockInfo extends Component {
             .then(data => {
                 let info = {}
                 if (!data.hasOwnProperty('quandl_error')){
+                    let shortName = '';
+                    var re = /^[^(]+/;
+                    var match = data.dataset.name.match(re);
+                    if (match){
+                        shortName = match[0];
+                    }
                     info = {
                         data: data.dataset.data,
+                        name: shortName
                     }
-                    this.setState({ information : info.data })
+                    this.setState({ 
+                        information : info.data,
+                        name: info.name
+                    })
                 }
                 else {
                     info = null
@@ -41,7 +52,7 @@ class StockInfo extends Component {
     render() {
         return (
             <div className="StockInfo">
-                <h3>Stock: {this.props.match.params.ticker}</h3>                
+                <h3>Stock: {this.state.name}</h3>                
                 <table>
                     <tbody>
                         <tr>
