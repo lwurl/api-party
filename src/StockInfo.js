@@ -41,6 +41,7 @@ class StockInfo extends Component {
                         information : info.data,
                         name: info.name
                     })
+                    //debugger
                 }
                 else {
                     info = null
@@ -63,7 +64,7 @@ class StockInfo extends Component {
                             ? this.state.information.map(datum => 
                                 <tr key={index++}>
                                     <td>{datum[0]}</td>
-                                    <td>{datum[1]}</td>
+                                    <td>{(datum[1]*100).toFixed(2)}</td>
                                 </tr>)
                             : <h3> ERROR </h3>
                         }
