@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
 import StockInfo from './StockInfo';
 
+import './Stocks.css';
+
 class Stocks extends Component {
     state = {
         ticker: '',
