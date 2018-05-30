@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import StockTableItem from './StockTableItem';
+import './StockInfo.css';
 let index = 0;
 
 class StockInfo extends Component {
@@ -14,7 +14,10 @@ class StockInfo extends Component {
     }
 
     componentWillReceiveProps = (newProps) => {
-        this.fetchStockInfo(newProps);
+        const locationChanged = newProps.location !== this.props.location
+        if (locationChanged) {
+            this.fetchStockInfo(newProps);
+        }
     }
 
     fetchStockInfo(props) {
@@ -47,7 +50,10 @@ class StockInfo extends Component {
                         </tr>
                         {this.state.information 
                             ? this.state.information.map(datum => 
-                                <StockTableItem key={index++} point={datum} />)
+                                <tr key={index++}>
+                                    <td>{datum[0]}</td>
+                                    <td>{datum[1]}</td>
+                                </tr>)
                             : <h3> ERROR </h3>
                         }
                     </tbody>
